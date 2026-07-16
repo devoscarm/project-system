@@ -9,6 +9,7 @@ What each section holds:
 - Long term — the roadmap toward the goal (the goal itself lives in <project-name>.md): direction, milestones, and if useful what the project will not become. Rewritten each session, never appended.
 - Rules & lessons — rules and lessons specific to THIS project that must survive across sessions: gotchas, conventions, decisions that still bind. Stable — add and prune deliberately, don't churn. A lesson that would help other projects goes to rules.md instead.
 - Continue — normally empty: the mid-task handoff for resuming in a fresh chat. /handoff-continue writes it (laying out its own sub-structure); /continue reads and clears it. Volatile in-flight state only — one handoff at a time.
+- Sessions in flight — normally empty: one line per chat currently open on this project. /start adds a line (the only thing it ever writes), /end removes it. If lines pile up here, sessions were abandoned without /end — clear them deliberately.
 -->
 
 # state.md - <project name>
@@ -28,4 +29,7 @@ _(placeholder — replace on first fill)_
 _(empty until a project-specific rule emerges)_
 
 ## Continue
+_(normally empty)_
+
+## Sessions in flight
 _(normally empty)_

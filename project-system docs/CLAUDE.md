@@ -20,7 +20,7 @@ CLAUDE.md (this — auto-loaded) → the `<name>.md` context file → rules.md �
 ## The skills
 
 - **/adopt** — bring a project I've already started into the system: learn it from its own files, then build the four docs above.
-- **/start** — begin a new project, or start a new session: read the files above, then interview me until we're aligned.
-- **/end** — close a session: update state.md, add any generalizable lesson to rules.md, and commit.
+- **/start** — begin a new project, or start a new session: pull, read the files above, register the session in state.md's Sessions in flight, then interview me until we're aligned.
+- **/end** — close a session: merge-update state.md (parallel sessions may have ended first), add any generalizable lesson to rules.md, and commit.
 - **/handoff-continue** — a session hits its context limit mid-task: dump what a fresh chat needs into state.md's Continue section.
 - **/continue** — in the fresh chat: read the Continue handoff, pick the work up, then clear it.
