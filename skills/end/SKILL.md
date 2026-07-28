@@ -1,24 +1,48 @@
 ---
 name: end
-description: End a session — save state, capture lessons, commit.
+description: End a session — reconcile state, capture lessons, commit.
 disable-model-invocation: true
 ---
-I'm ending a session. Do these three steps in order.
+I'm ending a session. Do these four steps in order.
 
-## 1. Update state.md
+## 1. Reconcile state.md — which means deleting, not only writing
 
-**Re-read `state.md` from disk first — never trust the copy in your context.** If it changed since /start read it (a parallel session ended before this one), merge: keep what you don't recognize, weave this session's outcome into it, and tell me what you merged. Overwriting the unknown is how parallel sessions erase each other.
+**Re-read `state.md` from disk first — never trust the copy in your context.** If it changed since `/start` read it (a parallel session ended before this one), merge: keep what you don't recognise, weave this session's outcome into it, and tell me what you merged. Overwriting the unknown is how parallel sessions erase each other.
 
-Then rewrite only what actually changed. On each section's first fill (a fresh project), replace its placeholder description with real content, and leave the header comment untouched.
+`state.md` is a **state**, not a log: if something is written there it is true, and if it is not written there it is not true. History lives in `git log` — which is why step 3's commit message is where this session's story goes, and why nothing here needs to record that the session happened at all.
 
-- **Now / Short term / Long term** — compress and rewrite to match where we are. Never append; they're a snapshot, not a log.
-- **Rules & lessons** — add or prune deliberately, don't churn. Only rules specific to THIS project that never generalize. A lesson that would help other projects goes to `rules.md` instead (step 2).
-- **Sessions in flight** — remove this session's line. Leave any other lines alone: their sessions will clear them.
+So the work is three moves, and the first is the one that gets skipped:
 
-## 2. Add a lesson to rules.md — only if one emerged
+- **Delete what is no longer true.** Walk the file entry by entry. An item this session closed is **removed**, not ticked — `✅ DONE`, `~~struck through~~` and "original text:" all belong to a log, and keeping them is how a file grows forever while nobody dares prune it. A fact that turned out to be false is **replaced**, not annotated.
+- **Verify before you keep.** An entry you neither closed nor touched is a *claim*, not furniture: it carries the authority of having been checked once, by somebody who may have been wrong. Where re-checking is cheap, re-check it, and be ready to delete it as **false** rather than carry it another session. Where it is not cheap, keep it — but make sure it says how it *could* be re-checked (a command, a `file:line`, "measured on <date>", "asked on <date>"). An entry nobody can disprove without redoing the work that produced it is an opinion with a date on it.
+- **Then write what changed** — the present tense of the world, with no session numbers in it.
 
-If this session produced a rule or lesson that could help other projects, add it to `rules.md` under **From this project**. If nothing generalizable came up, leave the file alone — don't pad it.
+**Respect the file's budget.** If `state.md` states a line budget in its header comment, measure it (`wc -l`) and prune until it fits. What will not fit is almost always history, and history is already in git. A budget nobody measures is an exhortation, and exhortations do not survive fifty sessions: this file once grew past a thousand lines while its own header said to prune freely.
 
-## 3. Commit and push — only if this is a git repo
+**Sessions in flight**: remove this session's line, and leave any other lines alone — their sessions will clear them. Do not write a post-mortem of your own session there. If it taught something, that is step 2's business; if it did not, the commit message is enough.
 
-If the project has a git repo with a remote, stage **only the files this session touched** — never `git add -A`: a parallel session may have half-finished work in the same working tree. Run `git status` first; if there are modified files you don't recognize as yours, leave them unstaged and tell me about them. Then commit with a message that captures the *why* of what changed, and push. Every commit you author carries a `Claude-Session: <session-id>` trailer (read the id from your scratchpad path; ask me if you can't determine it) so the git history points back to the conversation that produced it — never commit the transcript itself. If the push is rejected because a parallel session pushed first, `git pull --rebase` and push again; if that surfaces conflicts, stop and show me instead of resolving blindly. If there's no repo or no remote, skip this and tell me the project has no git home yet.
+⚠️ And be honest about a session that has not ended: `/end` is a ritual, not a boundary. Work often continues after it. When it does, what you wrote here is now wrong and gets updated alongside the work that contradicts it — a self-assessment written at `/end` is the one part of the file nobody re-reads, because it reads like a summing-up.
+
+## 2. Capture the lesson — only if one emerged
+
+If this session produced a rule or lesson that generalises beyond this project, add it to `rules.md` under **From this project**. If nothing generalisable came up, leave the file alone — don't pad it.
+
+Keep the rule itself to a few lines: the imperative, plus **the tell** — what you will be doing when it is about to bind. If the project keeps a `rules-cases.md`, the story of what happened goes *there*, under the same number. A rule that grows past a handful of lines has become a case wearing a law's clothes, and it will then be re-read in full at the start of every future session.
+
+⚠️ **Numbers are identifiers, not positions.** They are cited in `state.md`, in commit messages, in the architecture document and in git history you cannot edit. Prune freely; never renumber. The sequence is allowed to have gaps and suffixes — leave it ugly.
+
+If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
+
+## 3. Commit — and push only where the project says to
+
+Stage **only the files this session touched** — never `git add -A`: a parallel session may have half-finished work in the same tree. Run `git status --short` first; if there are modified files you don't recognise as yours, leave them unstaged and tell me about them.
+
+The commit message is where this session's story lives, so write it as though it were the only record — because it is. What changed, **why**, what it cost, what it taught, and what turned out to be false. Several distinct operations in one chat means several commits, each closing its own.
+
+Every commit carries a `Claude-Session: <session-id>` trailer (read the id from your scratchpad path; ask me if you can't determine it), so the history points back at the conversation that produced it. Never commit the transcript itself.
+
+**Push according to the project's rule, not by reflex.** Where the project says code repos are pushed by hand, commit and stop. If you do push and it is rejected because a parallel session pushed first, `git pull --rebase` and push again; if that surfaces conflicts, stop and show me instead of resolving blindly. If there's no repo or no remote, skip this and tell me the project has no git home yet.
+
+## 4. Tell me what you deleted
+
+Close by naming what came *out* of `state.md`, and why: closed, superseded, or disproved. It is the half of this ritual I cannot see from a diff without reading the whole thing, and it is the half that keeps the file honest.
