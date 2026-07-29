@@ -4,7 +4,7 @@ description: Start a new project, or start a new session on an existing one.
 disable-model-invocation: true
 ---
 
-I'm starting a project, or a new session on one. Do these three steps in order.
+I'm starting a project, or a new session on one. Do these steps in order.
 
 ## 1. Sync, then get your bearings
 
@@ -31,7 +31,19 @@ Then, before asking me anything, read **the always-read set, and only that**:
 
 This line is the only thing `/start` ever writes; the rest of `state.md` belongs to `/end`.
 
-## 3. Grill me
+## 3. If this session executes a written brief, propose the model and wait
+
+Some sessions design; others execute. When a session designs, its output is often a **brief** — a file holding a contract already decided, so that the session executing it implements instead of re-deciding. If this project keeps briefs, `state.md` lists the open ones (the project names them: *mandate*, *brief*, *work order*), and each carries its own file perimeter for step 2's ownership line.
+
+- **If I told you to execute one, read it now, in full, before anything else.** Its perimeter replaces the one you would have guessed; widen or narrow your session line accordingly and re-commit it.
+- **A brief is a claim, not a task.** It was written when the world looked a certain way, and the world moved: another session may have already built part of it, or made it pointless. Before proposing anything, check the parts you can check cheaply — the routes, the files, the migrations it assumes. If it is stale, say so and propose the pruned version rather than executing a plan that was true last week.
+- **Then propose, and stop.** Tell me, in one short message: what this brief does, **which model you recommend and why**, and how much work it looks like. Then **wait for my go** — I may switch model first, and switching mid-session keeps this conversation intact. Do not touch a file before I answer.
+
+How to recommend a model, in one line: **the more a mistake would propagate instead of failing, the stronger the model.** Irreversible effects, security boundaries, schema shapes with no test that can catch a wrong one, work with no oracle to check it against — those want the strongest available. Work whose contract is already written and whose net is a test suite does not.
+
+If this session has no brief, skip this step.
+
+## 4. Grill me
 
 Interview me relentlessly until we reach a shared understanding — until we can both state what we're building and why. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, give your recommended answer.
 
@@ -39,6 +51,6 @@ Ask one question at a time and wait for my answer before the next. Asking severa
 
 If a question can be answered by exploring the files or the code, explore instead of asking.
 
-Match the depth to the situation: a fresh project needs the full interview; resuming a session means reading `state.md` first and grilling only where the plan is unclear.
+Match the depth to the situation: a fresh project needs the full interview; resuming a session means reading `state.md` first and grilling only where the plan is unclear; and a session executing a brief has already had its interview — the brief *is* the interview's output, so grill me only where the brief is silent or where the world has moved under it.
 
 Don't write `state.md` here beyond the session line — `/end` owns it at the session's close.
