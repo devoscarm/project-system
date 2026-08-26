@@ -1,7 +1,7 @@
 <!--
-DON'T MODIFY this comment 
+DON'T MODIFY this comment
 
-state.md is the project's live handoff: written by /end at each session's close, read by /start. Keep it short — record the why, not the plain what (the what is already in the code and git).
+state.md is the project's live handoff: rewritten by /end at each session's close, read by /start. /new-project and /adopt first-fill it when the project joins the system, each section only where the answer already exists — an undecided one keeps its placeholder. Keep it short - record the why, not the plain what, don't write anything that is already written in other documents, code, comments and git history.
 
 What each section holds:
 - Now — what exists and works as of the last session's end. A snapshot, not a play-by-play. Rewritten each session, never appended.

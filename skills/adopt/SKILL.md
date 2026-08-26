@@ -19,7 +19,7 @@ Read the flagged docs, then enough of the content to know: what this is, why it 
 You need `CLAUDE.md` (the map) and `rules.md` (the Global rules) to copy in. Look, in order:
 
 1. A genuine system copy already in the project → use it.
-2. A `project-system docs` folder anywhere in the folder you can access → copy both from there.
+2. A `project-system-docs` folder anywhere in the folder you can access → copy both from there.
 3. Neither → stop and tell me to fetch them from https://github.com/vukappa4/project-system, then re-run.
 
 ## 4. Grill me until the context is complete

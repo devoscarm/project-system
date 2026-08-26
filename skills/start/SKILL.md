@@ -1,6 +1,6 @@
 ---
 name: start
-description: Start a new project, or start a new session on an existing one.
+description: Start a session on a project that already exists.
 disable-model-invocation: true
 ---
 

@@ -4,7 +4,7 @@ description: Hand this session off mid-task.
 disable-model-invocation: true
 ---
 
-This session is nearing its context limit mid-task, but the work continues in a fresh chat. Capture what that chat needs into `state.md`'s `Continue` section, then stop.
+This session is nearing its smart zone context window, but the work continues in a fresh chat. Capture what that chat needs into `state.md`'s `Continue` section, then stop.
 
 ## 1. Ignore the durable stuff
 
