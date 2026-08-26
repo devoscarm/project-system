@@ -3,7 +3,24 @@ name: end
 description: End a session — reconcile state, capture lessons, commit.
 disable-model-invocation: true
 ---
-I'm ending a session. Do these four steps in order.
+I'm ending a session. Do these five steps in order, starting from 0.
+
+## 0. Take the /end baton — on a shared clone, /end is a critical section
+
+On a clone where other sessions commit, /end is a read-merge-write of the whole `state.md`:
+two running at once redo each other's merges until luck converges them, and one interrupted
+midway leaves an uncommitted half-/end that anybody's next commit sweeps in. So /end runs
+**one at a time**, and git itself is the mutex:
+
+- First gesture, before touching anything else: mark **your own** session line in
+  *Sessions in flight* with `⏳ /end in corso`, then commit **that marker alone** and push.
+- If the push is rejected, pull `--rebase` and look: if another session's line carries a
+  `⏳` marker, **stop and wait** — tell me another /end is running, and retry when its
+  marker is gone (its /end deletes its whole line). If no other marker exists, push again.
+- Only with your marker visible on the remote do steps 1-4 begin. Your marker dies with
+  your line in step 1.
+- One verb per call throughout: pull, THEN look, THEN edit, THEN commit, THEN push — never
+  chained in one command.
 
 ## 1. Reconcile state.md — which means deleting, not only writing
 
