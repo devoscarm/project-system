@@ -53,3 +53,10 @@ Then:
 Put the `skills/` folder wherever your AI tool loads skills from — they're global, installed once, and work on every project.
 
 In this repo the templates live under `project-system-docs/` to keep the root clean — but every reference inside them is a bare, root-relative name (`CLAUDE.md`, `rules.md`, `state.md`). That's on purpose: when they land in a real project's root, the links just work. `project-name.md` is the one that gets renamed on the way in, to the project's own name, lowercased.
+
+## Running many chats in parallel
+
+`/start` and `/end` are built so that several sessions can work the same context repo at
+once without erasing each other: a sessions-in-flight ledger with per-file ownership,
+an `/end` that deletes instead of appending, and `/end` itself serialized through git.
+The design, and the two incidents that forced it, are in **[STATE-AS-STATE.md](STATE-AS-STATE.md)**.
