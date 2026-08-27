@@ -5,22 +5,24 @@ disable-model-invocation: true
 ---
 I'm ending a session. Do these five steps in order, starting from 0.
 
-## 0. Take the /end baton — on a shared clone, /end is a critical section
+## 0. Take the /end baton — where the clone is still shared
 
-On a clone where other sessions commit, /end is a read-merge-write of the whole `state.md`:
-two running at once redo each other's merges until luck converges them, and one interrupted
-midway leaves an uncommitted half-/end that anybody's next commit sweeps in. So /end runs
-**one at a time**, and git itself is the mutex:
+/end is a read-merge-write of the whole state file. Where that file lives in a clone other
+sessions also commit to, two /end runs at once redo each other's merges until luck converges
+them, and one interrupted midway leaves an uncommitted half-/end that anybody's next commit
+sweeps in. There, /end runs **one at a time**, and git itself is the mutex:
 
-- First gesture, before touching anything else: mark **your own** session line in
-  *Sessions in flight* with `⏳ /end in corso`, then commit **that marker alone** and push.
-- If the push is rejected, pull `--rebase` and look: if another session's line carries a
-  `⏳` marker, **stop and wait** — tell me another /end is running, and retry when its
-  marker is gone (its /end deletes its whole line). If no other marker exists, push again.
-- Only with your marker visible on the remote do steps 1-4 begin. Your marker dies with
-  your line in step 1.
-- One verb per call throughout: pull, THEN look, THEN edit, THEN commit, THEN push — never
-  chained in one command.
+- First gesture: mark **your own** lock with `⏳ /end in corso`, commit **that alone**, push.
+- If the push is rejected, pull `--rebase` and look: another lock carrying `⏳` means **stop and
+  wait** — tell me another /end is running, and retry when its marker is gone. No other marker:
+  push again.
+- Only with your marker visible on the remote do steps 1-4 begin. It dies with your lock in step 1.
+- One verb per call throughout: pull, THEN look, THEN edit, THEN commit, THEN push — never chained.
+
+⚠️ **This is about the file, not about the ritual.** Where the project gives each session its own
+working tree, the CODE needs none of this — your commits are yours by construction. Where locks
+are one file per session, the flight list needs none of it either: you delete your own file and
+nobody else's. What still needs the baton is the shared prose that every /end rewrites.
 
 ## 1. Reconcile state.md — which means deleting, not only writing
 
@@ -58,13 +60,38 @@ If the project keeps a scoreboard of remaining work, update it **only if somethi
 
 ## 3. Commit — and push only where the project says to
 
-Stage **only the files this session touched** — never `git add -A`: a parallel session may have half-finished work in the same tree. Run `git status --short` first; if there are modified files you don't recognise as yours, leave them unstaged and tell me about them.
+**In a shared working tree, stage only the files this session touched — never `git add -A`**: a parallel session may have half-finished work in the same tree. Run `git status --short` first; if there are modified files you don't recognise as yours, leave them unstaged and tell me about them.
+
+⚠️ And know the limit of that care, because it is not obvious and it has already cost a night:
+`git commit --only <path>` protects you from the shared INDEX, never from the shared FILE. Of that
+path it commits whatever is in the working tree, whoever wrote it — so another session's
+half-finished work can reach HEAD *without* the files that make it compile. When a path you must
+commit also holds somebody else's edits, do not commit the path: build the content you mean and
+put it in the index directly (`git hash-object -w` + `git update-index --cacheinfo`), leaving
+their working tree untouched.
+
+**In your own session worktree none of this applies**: `git add -A` and `git commit -a` are correct
+there, because nothing in that tree belongs to anyone else.
 
 The commit message is where this session's story lives, so write it as though it were the only record — because it is. What changed, **why**, what it cost, what it taught, and what turned out to be false. Several distinct operations in one chat means several commits, each closing its own.
 
 Every commit carries a `Claude-Session: <session-id>` trailer (read the id from your scratchpad path; ask me if you can't determine it), so the history points back at the conversation that produced it. Never commit the transcript itself.
 
 **Push according to the project's rule, not by reflex.** Where the project says code repos are pushed by hand, commit and stop. If you do push and it is rejected because a parallel session pushed first, `git pull --rebase` and push again; if that surfaces conflicts, stop and show me instead of resolving blindly. If there's no repo or no remote, skip this and tell me the project has no git home yet.
+
+## 3-bis. Hand your work back — close the worktree
+
+If this session had its own working tree, close it the way the project says (it will have one
+command). Two things that are not optional:
+
+- **Commit everything first.** Closing a worktree with uncommitted work throws that work away.
+- **The re-entry never rewrites commits.** A merge keeps every SHA, every author, every
+  `Claude-Session` trailer exactly as written — and SHAs are cited as re-check handles all over
+  the context files, by sessions that wrote them while they worked. A rebase would silently make
+  every one of those citations false. If the merge conflicts, resolve it and say what you chose;
+  do not take either side blindly.
+
+If this session worked in a shared clone instead, there is nothing to close here.
 
 ## 4. Tell me what you deleted
 

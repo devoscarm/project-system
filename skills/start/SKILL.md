@@ -20,16 +20,38 @@ Then, before asking me anything, read **the always-read set, and only that**:
 
 **Everything else is read on demand, not now.** The architecture document, the generated system map, the scoreboard, the field notes, the rule cases, any guide written for me rather than for you: those get opened when the work needs them, and often with `grep` rather than whole. Reading a hundred thousand tokens of context before knowing the task does not make you know it — it makes the one line that matters compete with the thousand that don't, and that is how a false line survives ten sessions of being read.
 
-## 2. Register the session
+## 2. Take your own working tree, then register the session
 
-`state.md` has a **Sessions in flight** section (create it if this project's file predates it). It lists **open sessions only**: a session that closed leaves no trace here, because `git log` already tells that story.
+**If the project gives each session its own working tree, open it FIRST and do all your work
+there.** A shared working directory is not a discipline problem that better rules can fix: when
+two chats edit the same file, their text is physically mixed in one file on disk, and no git
+command can separate it afterwards — not `commit --only`, not `add -p`, because all of them read
+the file as it is. A session with its own tree cannot suffer that, and the verbs a shared tree
+forbids (`git add -A`, `git commit -a`, `git stash`, `--amend`) become safe again.
 
-- If it lists any session, tell me before anything else: a parallel chat may be working these same files. Its `/end` and ours must each merge into `state.md`, never overwrite it.
-- **A line is not a lock until you have checked that it is alive.** An orphan line — left by a chat that died without `/end`, often uncommitted — reads exactly like a live one. Check the transcript's last activity (`claude --resume <id>`), the working tree, and whether the work it announces was actually done. If it is dead, recover anything that session discovered, then delete the line.
-- Add one line for this session: date, **start time**, the mission in a few words, **which repo and file tree it owns**, and this session's id. The ownership is the point — two tasks that sound independent collide the moment they touch the same files.
-- **Commit that line immediately**, before touching anything else. A lock nobody can see is not a lock, and an uncommitted one is invisible to precisely the session it was written for.
+The project's `CLAUDE.md` says whether it has this and what the command is. If it does not, work
+in the shared clone and stay under the project's rules for it.
 
-This line is the only thing `/start` ever writes; the rest of `state.md` belongs to `/end`.
+Then register. **The lock is a claim of OWNERSHIP, and its whole job is to be readable by a chat
+that arrives after you**: which repos and which file trees are yours, plus your worktree and
+branch if you have one.
+
+- **Where the lock goes is the project's business** — one file per session in a directory the
+  project names, or a line in a shared section if that is what it still keeps. Prefer a **file
+  per session** where it exists: a shared section is a shared write point, and two `/end`s
+  rewriting the same paragraph is how a live lock gets deleted by somebody acting in good faith.
+- If other sessions are registered, tell me before anything else, and say plainly whether their
+  perimeter collides with the mission — name the collision instead of averaging it away.
+- **A lock is not a lock until you have checked that it is alive.** An orphan left by a chat that
+  died reads exactly like a live one. Measure the **work** it announces — its commits, its
+  worktree, the files it claims — never the clock on its transcript. ⚠️ And a **guided** session
+  (the work is the human's hands on a machine you must not touch) moves nothing measurable: hours
+  of real work leave zero traces. If a lock declares itself guided, an immobile perimeter means
+  nothing. Say so in your own lock if yours is guided.
+- **Commit the lock immediately**, before touching anything else. A lock nobody can see is not a
+  lock, and an uncommitted one is invisible to precisely the session it was written for.
+
+This lock is the only thing `/start` ever writes; the rest of the state belongs to `/end`.
 
 ## 3. If this session executes a written brief, propose the model and wait
 
