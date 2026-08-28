@@ -32,6 +32,14 @@ forbids (`git add -A`, `git commit -a`, `git stash`, `--amend`) become safe agai
 The project's `CLAUDE.md` says whether it has this and what the command is. If it does not, work
 in the shared clone and stay under the project's rules for it.
 
+**Your session id comes from your scratchpad path and from NOWHERE else** — it is the UUID
+directory in that path, and the short id is its first segment. Read it before you write
+anything, because the worktree, the branch, the lock filename and every commit subject are all
+named after it. ⚠️ **Never take an id from `sessions/`, from a recent commit message, or from
+anything another session wrote**: those are *their* ids. A lock filed under somebody else's
+name makes their `/end` delete yours, and makes your commits point at their conversation — and
+neither failure announces itself. If you cannot determine your id, ask me; do not guess one.
+
 Then register. **The lock is a claim of OWNERSHIP, and its whole job is to be readable by a chat
 that arrives after you**: which repos and which file trees are yours, plus your worktree and
 branch if you have one.
@@ -48,8 +56,15 @@ branch if you have one.
   (the work is the human's hands on a machine you must not touch) moves nothing measurable: hours
   of real work leave zero traces. If a lock declares itself guided, an immobile perimeter means
   nothing. Say so in your own lock if yours is guided.
-- **Commit the lock immediately**, before touching anything else. A lock nobody can see is not a
-  lock, and an uncommitted one is invisible to precisely the session it was written for.
+- **The filename must be NEW.** If `sessions/<your-id>.md` already exists, it is not yours —
+  stop and tell me instead of writing into it. Two chats behind one name destroy the very
+  handle the orphan-lock rule depends on: neither can be measured separately, and the first
+  `/end` deletes the other's lock.
+- **Commit the lock before you touch any file of the WORK.** Reading, enumerating and
+  measuring touch nothing, so when I have not yet named the mission the lock is written the
+  moment I pick one — not before, when its perimeter would be a guess. What must never happen
+  is work landing under no lock at all. A lock nobody can see is not a lock, and an uncommitted
+  one is invisible to precisely the session it was written for.
 
 This lock is the only thing `/start` ever writes; the rest of the state belongs to `/end`.
 
@@ -63,7 +78,7 @@ Some sessions design; others execute. When a session designs, its output is ofte
 
 - **If I told you to execute one, read it now, in full, before anything else.** Its perimeter replaces the one you would have guessed; widen or narrow your session line accordingly and re-commit it. And read LESS than a planning session would: the brief is your memory — open only the on-demand files and sections it names (a `knowledge.md` section, a runbook), with `grep`, when the work reaches them. An executor that loads the whole context re-creates the problem tiered reading exists to solve.
 - **A brief is a claim, not a task.** It was written when the world looked a certain way, and the world moved: another session may have already built part of it, or made it pointless. Before proposing anything, check the parts you can check cheaply — the routes, the files, the migrations it assumes. If it is stale, say so and propose the pruned version rather than executing a plan that was true last week.
-- **Then propose, and stop.** Tell me, in one short message: what this brief does, **which model you recommend and why**, and how much work it looks like. Then **wait for my go** — I may switch model first, and switching mid-session keeps this conversation intact. Do not touch a file before I answer.
+- **Then propose, and stop.** Tell me, in one short message: what this brief does, **which model you recommend and why**, and how much work it looks like. Then **wait for my go** — I may switch model first, and switching mid-session keeps this conversation intact. Do not touch a file of the work before I answer — step 2's lock is not work, it is what makes this session visible, and it is written as soon as the brief is picked.
 
 How to recommend a model, in one line: **the more a mistake would propagate instead of failing, the stronger the model.** Irreversible effects, security boundaries, schema shapes with no test that can catch a wrong one, work with no oracle to check it against — those want the strongest available. Work whose contract is already written and whose net is a test suite does not.
 
