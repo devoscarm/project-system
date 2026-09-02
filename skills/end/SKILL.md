@@ -45,6 +45,7 @@ So the work is three moves, and the first is the one that gets skipped:
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
 - **A brief this session did NOT execute is re-verified before it is left in the queue** — and this is the move that gets skipped. Other sessions have been building all along, so parts of it may already exist, or its premise may be gone. Where checking is cheap, check; then prune it to what is still true, or delete it as **done by other means**. A brief that quietly rots is worse than a stale note, because someone will hand it to a fresh session and it will be *obeyed*.
 - **If this session wrote briefs for others**, make sure each one carries what its executor needs before it can start: the file perimeter it owns, its sequencing constraints against the other open briefs, and its recommended model — so the executing session can propose and wait rather than guess.
+- ⚠️ **And every brief declares what ALREADY EXISTS**, in a section of its own that names what you searched (`ls` of the skills, the neighbouring repos, the libraries that solve the same problem) and what you found — **including when the answer is «nothing»**. A plan that does not say it looked is implicitly claiming there was nothing to look at. This is not advice: where the project's check enforces it, a brief without that section is RED and the session cannot close. It exists because on 2026-09-01 three sessions spent a day hand-building a card model while a 25-component design system sat in a skill directory listed in all of their tool inventories.
 
 ⚠️ And be honest about a session that has not ended: `/end` is a ritual, not a boundary. Work often continues after it. When it does, what you wrote here is now wrong and gets updated alongside the work that contradicts it — a self-assessment written at `/end` is the one part of the file nobody re-reads, because it reads like a summing-up.
 
@@ -83,7 +84,8 @@ to have gaps and suffixes — leave it ugly.
 Where the project keeps one (here: `python3 scripts/rules-check.py`, from the context root), run
 it and **do not close the session while it is red**. It names the exact element that is missing —
 a reused number, a law over the ceiling, a law with no mechanism marker, a rule with no case, a
-`regola N` citation that no longer resolves, a state file that grew past its budget. Fix what it
+`regola N` citation that no longer resolves, a state file that grew past its budget, a brief that
+does not say what already exists. Fix what it
 names; if you believe a red is wrong, say so to me rather than editing the check to be quiet.
 
 If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
