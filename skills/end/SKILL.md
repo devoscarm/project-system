@@ -48,13 +48,43 @@ So the work is three moves, and the first is the one that gets skipped:
 
 ⚠️ And be honest about a session that has not ended: `/end` is a ritual, not a boundary. Work often continues after it. When it does, what you wrote here is now wrong and gets updated alongside the work that contradicts it — a self-assessment written at `/end` is the one part of the file nobody re-reads, because it reads like a summing-up.
 
-## 2. Capture the lesson — only if one emerged
+## 2. Capture the lesson — and it almost never belongs in the law
 
-If this session produced a rule or lesson that generalises beyond this project, add it to `rules.md` under **From this project**. If nothing generalisable came up, leave the file alone — don't pad it.
+**Default: this session produced no law.** A law is what binds EVERY session whatever it is doing;
+what you learned today is almost always a *trap* — narrow, biting only while somebody touches that
+one thing. Writing a trap into the law is how a rules file reaches 222 entries that nobody can hold
+and therefore nobody follows: measured on this system on 2026-09-02, growing ~4.5 rules a day and
+never once shrinking.
 
-Keep the rule itself to a few lines: the imperative, plus **the tell** — what you will be doing when it is about to bind. If the project keeps a `rules-cases.md`, the story of what happened goes *there*, under the same number. A rule that grows past a handful of lines has become a case wearing a law's clothes, and it will then be re-read in full at the start of every future session.
+So the lesson has **three possible homes**, and you pick before you write:
 
-⚠️ **Numbers are identifiers, not positions.** They are cited in `state.md`, in commit messages, in the architecture document and in git history you cannot edit. Prune freely; never renumber. The sequence is allowed to have gaps and suffixes — leave it ugly.
+- **A trap** → the project's traps file (here: `osan-core/trappole.md`), verbatim, with a fresh
+  number. It is grepped when the work reaches that area, never read at `/start`. **This is where
+  almost everything goes.**
+- **A case** → `rules-cases.md`, under the same number: what happened, what it cost, the shape of
+  the defect. Every new entry gets one — the check below refuses a rule that arrives without it.
+- **A law** → `rules.md`, and ONLY if it passes two tests: it binds every session regardless of
+  task, AND it comes **with the mechanism that makes it bite**. The file has a hard ceiling: to add
+  one past it, one comes out. Each law declares ⚙️ (a check that goes red), 🔒 (a structure that
+  refuses) or 👁️ (nothing) — and the count of 👁️ may only go DOWN. A law you can only mark 👁️ is
+  a law you already know will be violated: write the check, or write a trap instead.
+
+⚠️ **A rule that PRESCRIBES without a MECHANISM does not bite** (rule 214). The proof is in this
+system's own history: the three rules never violated in a month are the three that *refuse* — the
+CI on push, the grants replayed by 27 suites, the boot that will not start on a bad allowlist. The
+prose ones were violated, every one, by sessions that had read them that same morning.
+
+⚠️ **Numbers are identifiers, not positions.** They are cited in `state.md`, in commit messages, in
+mandates and in git history you cannot edit. Prune freely; never renumber. The sequence is allowed
+to have gaps and suffixes — leave it ugly.
+
+### 2-bis. Run the check — it is what makes step 2 real
+
+Where the project keeps one (here: `python3 scripts/rules-check.py`, from the context root), run
+it and **do not close the session while it is red**. It names the exact element that is missing —
+a reused number, a law over the ceiling, a law with no mechanism marker, a rule with no case, a
+`regola N` citation that no longer resolves, a state file that grew past its budget. Fix what it
+names; if you believe a red is wrong, say so to me rather than editing the check to be quiet.
 
 If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
 
