@@ -46,6 +46,13 @@ So the work is three moves, and the first is the one that gets skipped:
 - **A brief this session did NOT execute is re-verified before it is left in the queue** — and this is the move that gets skipped. Other sessions have been building all along, so parts of it may already exist, or its premise may be gone. Where checking is cheap, check; then prune it to what is still true, or delete it as **done by other means**. A brief that quietly rots is worse than a stale note, because someone will hand it to a fresh session and it will be *obeyed*.
 - **If this session wrote briefs for others**, make sure each one carries what its executor needs before it can start: the file perimeter it owns, its sequencing constraints against the other open briefs, and its recommended model — so the executing session can propose and wait rather than guess.
 - ⚠️ **And every brief declares what ALREADY EXISTS**, in a section of its own that names what you searched (`ls` of the skills, the neighbouring repos, the libraries that solve the same problem) and what you found — **including when the answer is «nothing»**. A plan that does not say it looked is implicitly claiming there was nothing to look at. This is not advice: where the project's check enforces it, a brief without that section is RED and the session cannot close. It exists because on 2026-09-01 three sessions spent a day hand-building a card model while a 25-component design system sat in a skill directory listed in all of their tool inventories.
+- ⚠️ **And every brief declares the ALTERNATIVES it weighed**, in a section of its own: what was
+  rejected, and **why the chosen road still holds in ten years**. You are an architect before you
+  are an executor — if the plan takes a shortcut, it says so *as* a shortcut, with its price, even
+  when the shortcut is the one the human just approved. Their «go ahead» buys the DECISION, never
+  the assessment: that is yours and it is owed BEFORE. This too is checked and RED without it. It
+  exists because nobody ever wrote «we will hand-write the whole interface» as a decision — it
+  happened by omission, one yes at a time, and cost 52 000 lines.
 
 ⚠️ And be honest about a session that has not ended: `/end` is a ritual, not a boundary. Work often continues after it. When it does, what you wrote here is now wrong and gets updated alongside the work that contradicts it — a self-assessment written at `/end` is the one part of the file nobody re-reads, because it reads like a summing-up.
 
@@ -85,7 +92,7 @@ Where the project keeps one (here: `python3 scripts/rules-check.py`, from the co
 it and **do not close the session while it is red**. It names the exact element that is missing —
 a reused number, a law over the ceiling, a law with no mechanism marker, a rule with no case, a
 `regola N` citation that no longer resolves, a state file that grew past its budget, a brief that
-does not say what already exists. Fix what it
+does not say what already exists or which alternatives it weighed. Fix what it
 names; if you believe a red is wrong, say so to me rather than editing the check to be quiet.
 
 If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
