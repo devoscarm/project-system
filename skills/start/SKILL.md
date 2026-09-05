@@ -55,7 +55,9 @@ branch if you have one.
   worktree, the files it claims — never the clock on its transcript. ⚠️ And a **guided** session
   (the work is the human's hands on a machine you must not touch) moves nothing measurable: hours
   of real work leave zero traces. If a lock declares itself guided, an immobile perimeter means
-  nothing. Say so in your own lock if yours is guided.
+  nothing. Say so in your own lock if yours is guided — and the same for an
+  **administrative** session (step 3), which moves prose and no code: measured on code
+  commits it looks dead while it is doing the only work nobody else is doing.
 - **The filename must be NEW.** If `sessions/<your-id>.md` already exists, it is not yours —
   stop and tell me instead of writing into it. Two chats behind one name destroy the very
   handle the orphan-lock rule depends on: neither can be measured separately, and the first
@@ -68,9 +70,21 @@ branch if you have one.
 
 This lock is the only thing `/start` ever writes; the rest of the state belongs to `/end`.
 
-## 3. If this session executes a written brief, propose the model and wait
+## 3. What shape is this session? There are THREE, not two
 
-Some sessions design; others execute. When a session designs, its output is often a **brief** — a file holding a contract already decided, so that the session executing it implements instead of re-deciding. If this project keeps briefs, `state.md` lists the open ones (the project names them: *mandate*, *brief*, *work order*), and each carries its own file perimeter for step 2's ownership line.
+A session takes one of three shapes, and picking the wrong one costs a whole session:
+
+- **It EXECUTES a written brief.** When a session designs, its output is often a **brief** — a file holding a contract already decided, so that the session executing it implements instead of re-deciding. If this project keeps briefs, `state.md` lists the open ones (the project names them: *mandate*, *brief*, *work order*), and each carries its own file perimeter for step 2's ownership line.
+- **It DESIGNS** — it produces a brief for somebody else to execute.
+- **It ADMINISTERS.** It owns **no code at all**. It keeps the queue honest and re-measures a brief before anyone executes a stale one; it prunes, writes and re-orders the briefs; it translates outside doctrine into this project's own rites; it decides the questions the documents explicitly leave to it; it answers "what is left / which brief / what must *I* do myself"; and it argues with me — including about shortcuts I have already approved.
+
+### Check for the administrator FIRST, before enumerating anything
+
+Read the ledger of live sessions. **If no administrative session is registered, propose becoming one** — say it in the same message as the brief list, not instead of it, and say plainly what it would own (the context prose: the briefs, the `state.md` files, the rules, the file written for me) and what it would not (**any code repository** — when the answer to a question is code, an administrative session writes a *brief*, not a commit). An administrative session owns no code, so it **collides with nothing** and never has to wait its turn behind a live executor.
+
+**Why this check is first.** Everything else in this system is built for executors — working trees, locks, file perimeters, a closing rite that merges. Nobody is built to keep the queue honest, so a brief written when the world looked different gets executed as written, and the pruning falls on me by hand or on whichever chat happens to pass. And without this check the default is actively wrong: a chat that starts with no mission gets funnelled toward "execute one", which is the worst move precisely when the queue itself is what needs looking at.
+
+### Then, whichever shape it is
 
 - **If I launched `/start` with no mission at all AND a planning/design session is already registered in *Sessions in flight*, assume this session EXECUTES.** Don't become a second planner beside the one that exists: enumerate the queued briefs (next bullet) and propose them **optimized for parallelism** — what can start NOW without touching any live session's files or repos, in a ranked short list. Only if I then say this session is for something else does the assumption drop.
 
@@ -82,7 +96,8 @@ Some sessions design; others execute. When a session designs, its output is ofte
 
 How to recommend a model, in one line: **the more a mistake would propagate instead of failing, the stronger the model.** Irreversible effects, security boundaries, schema shapes with no test that can catch a wrong one, work with no oracle to check it against — those want the strongest available. Work whose contract is already written and whose net is a test suite does not.
 
-If this session has no brief, skip this step.
+If this session has no brief, skip the brief bullets — but **not** the administrative check
+above: that one runs on every `/start`.
 
 ## 4. Grill me
 
