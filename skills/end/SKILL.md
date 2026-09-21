@@ -5,6 +5,10 @@ disable-model-invocation: true
 ---
 I'm ending a session. Do these five steps in order, starting from 0.
 
+**My words in this conversation beat every line below** (rule 319 where the project numbers it):
+if a step says to do something I have just told you not to, do what I said and name the step
+you skipped.
+
 ## 0. Take the /end baton — where the clone is still shared
 
 /end is a read-merge-write of the whole state file. Where that file lives in a clone other
@@ -36,7 +40,12 @@ So the work is three moves, and the first is the one that gets skipped:
 - **Verify before you keep.** An entry you neither closed nor touched is a *claim*, not furniture: it carries the authority of having been checked once, by somebody who may have been wrong. Where re-checking is cheap, re-check it, and be ready to delete it as **false** rather than carry it another session. Where it is not cheap, keep it — but make sure it says how it *could* be re-checked (a command, a `file:line`, "measured on <date>", "asked on <date>"). An entry nobody can disprove without redoing the work that produced it is an opinion with a date on it.
 - **Then write what changed** — the present tense of the world, with no session numbers in it.
 
-**Respect the file's budget.** If `state.md` states a line budget in its header comment, measure it (`wc -l`) and prune until it fits. What will not fit is almost always history, and history is already in git. A budget nobody measures is an exhortation, and exhortations do not survive fifty sessions: this file once grew past a thousand lines while its own header said to prune freely.
+**Respect the budget — it is measured, not hoped for.** Where the project keeps a context meter
+(here: `python3 scripts/context-budget.py`), every file has thresholds that can only go down, and
+step 2-bis's check fails if this session pushed one up. What will not fit is almost always history
+(already in git) or stable knowledge (it belongs in the on-demand files). Every surviving line has
+one of three forms: an imperative with its check, a present fact with the command that re-measures
+it, or a pointer. A count that changes with every merge is not written — its command and invariant are.
 
 **Sessions in flight**: remove this session's line, and leave any other lines alone — their sessions will clear them. Do not write a post-mortem of your own session there. If it taught something, that is step 2's business; if it did not, the commit message is enough.
 
@@ -45,20 +54,11 @@ So the work is three moves, and the first is the one that gets skipped:
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
 - **A brief this session did NOT execute is re-verified before it is left in the queue** — and this is the move that gets skipped. Other sessions have been building all along, so parts of it may already exist, or its premise may be gone. Where checking is cheap, check; then prune it to what is still true, or delete it as **done by other means**. A brief that quietly rots is worse than a stale note, because someone will hand it to a fresh session and it will be *obeyed*.
 - **If this session wrote briefs for others**, make sure each one carries what its executor needs before it can start: the file perimeter it owns, its sequencing constraints against the other open briefs, and its recommended model — so the executing session can propose and wait rather than guess.
-- ⚠️ **And every brief declares what ALREADY EXISTS**, in a section of its own that names what you searched (`ls` of the skills, the neighbouring repos, the libraries that solve the same problem) and what you found — **including when the answer is «nothing»**. A plan that does not say it looked is implicitly claiming there was nothing to look at. This is not advice: where the project's check enforces it, a brief without that section is RED and the session cannot close. It exists because on 2026-09-01 three sessions spent a day hand-building a card model while a 25-component design system sat in a skill directory listed in all of their tool inventories.
-- ⚠️ **And every brief declares its PERIMETER and its ORDER**, because the working mode is one
-  chat writing briefs and several executing them at once: a `## Perimetro` section listing the
-  paths it owns (globs fine), and a `**Seriale dopo:**` line naming the brief that must land
-  first, or `nessuno`. Two briefs that name the same file are the one failure no git command
-  repairs — two sessions' text is mixed physically in one file on disk. Where the project's check
-  enforces it, overlapping perimeters are RED before anybody starts.
-- ⚠️ **And every brief declares the ALTERNATIVES it weighed**, in a section of its own: what was
-  rejected, and **why the chosen road still holds in ten years**. You are an architect before you
-  are an executor — if the plan takes a shortcut, it says so *as* a shortcut, with its price, even
-  when the shortcut is the one the human just approved. Their «go ahead» buys the DECISION, never
-  the assessment: that is yours and it is owed BEFORE. This too is checked and RED without it. It
-  exists because nobody ever wrote «we will hand-write the whole interface» as a decision — it
-  happened by omission, one yes at a time, and cost 52 000 lines.
+- ⚠️ **And every brief declares three things, each in a section of its own — the check refuses
+  it otherwise**: what ALREADY EXISTS (what you searched, what you found, even «nothing»); its
+  PERIMETER (`## Perimetro`, the paths it owns) and ORDER (`**Seriale dopo:**` a brief or
+  `nessuno`); and the ALTERNATIVES it weighed, with why the chosen road holds in ten years — a
+  shortcut is written *as* a shortcut, with its price, even when the human just approved it.
 
 ⚠️ And be honest about a session that has not ended: `/end` is a ritual, not a boundary. Work often continues after it. When it does, what you wrote here is now wrong and gets updated alongside the work that contradicts it — a self-assessment written at `/end` is the one part of the file nobody re-reads, because it reads like a summing-up.
 
@@ -75,8 +75,9 @@ So the lesson has **three possible homes**, and you pick before you write:
 - **A trap** → the project's traps file (here: `osan-core/trappole.md`), verbatim, with a fresh
   number. It is grepped when the work reaches that area, never read at `/start`. **This is where
   almost everything goes.**
-- **A case** → `rules-cases.md`, under the same number: what happened, what it cost, the shape of
-  the defect. Every new entry gets one — the check below refuses a rule that arrives without it.
+- **A case** → `rules-cases.md`, under the same number — only for a new LAW: what happened, what
+  it cost, the shape of the defect, at most 25 lines. The check below refuses a law that arrives
+  without one. A trap carries its own story inside its text, in a clause, never as a dated trailer.
 - **A law** → `rules.md`, and ONLY if it passes two tests: it binds every session regardless of
   task, AND it comes **with the mechanism that makes it bite**. The file has a hard ceiling: to add
   one past it, one comes out. Each law declares ⚙️ (a check that goes red), 🔒 (a structure that
@@ -101,19 +102,20 @@ a reused number, a law over the ceiling, a law with no mechanism marker, a rule 
 does not say what already exists or which alternatives it weighed. Fix what it
 names; if you believe a red is wrong, say so to me rather than editing the check to be quiet.
 
+**Then ratchet.** Once it is green, run the meter's ratchet (here:
+`python3 scripts/context-budget.py --stringi`): every threshold this session brought down is
+locked where it now stands. The updated thresholds file goes into this session's commit.
+
 If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
 
 ## 3. Commit — and push only where the project says to
 
 **In a shared working tree, stage only the files this session touched — never `git add -A`**: a parallel session may have half-finished work in the same tree. Run `git status --short` first; if there are modified files you don't recognise as yours, leave them unstaged and tell me about them.
 
-⚠️ And know the limit of that care, because it is not obvious and it has already cost a night:
-`git commit --only <path>` protects you from the shared INDEX, never from the shared FILE. Of that
-path it commits whatever is in the working tree, whoever wrote it — so another session's
-half-finished work can reach HEAD *without* the files that make it compile. When a path you must
-commit also holds somebody else's edits, do not commit the path: build the content you mean and
-put it in the index directly (`git hash-object -w` + `git update-index --cacheinfo`), leaving
-their working tree untouched.
+⚠️ `git commit --only <path>` protects you from the shared INDEX, never from the shared FILE: of
+that path it commits whatever the working tree holds, whoever wrote it. When a path you must
+commit also holds somebody else's edits, build your content and put it in the index directly
+(`git hash-object -w` + `git update-index --cacheinfo`), leaving their working tree untouched.
 
 **In your own session worktree none of this applies**: `git add -A` and `git commit -a` are correct
 there, because nothing in that tree belongs to anyone else.
@@ -121,6 +123,13 @@ there, because nothing in that tree belongs to anyone else.
 The commit message is where this session's story lives, so write it as though it were the only record — because it is. What changed, **why**, what it cost, what it taught, and what turned out to be false. Several distinct operations in one chat means several commits, each closing its own.
 
 Every commit carries a `Claude-Session: <session-id>` trailer (read the id from your scratchpad path; ask me if you can't determine it), so the history points back at the conversation that produced it. Never commit the transcript itself.
+
+**Before pushing the context repo, sum to zero** (rule 320, where the project has it): run
+`python3 scripts/context-budget.py --somma-zero origin/main`. If this session's commits add net
+lines to the always-read set, either prune as much in the same set (one more commit — never
+`--amend`), or, if the growth is deliberate, add an empty commit whose message carries the line
+`Deroga somma zero: <why>`, run the ratchet again, and commit the thresholds it raised. Never edit
+a threshold up by hand to make the red go away.
 
 **Push according to the project's rule, not by reflex.** Where the project says code repos are pushed by hand, commit and stop. If you do push and it is rejected because a parallel session pushed first, `git pull --rebase` and push again; if that surfaces conflicts, stop and show me instead of resolving blindly. If there's no repo or no remote, skip this and tell me the project has no git home yet.
 
