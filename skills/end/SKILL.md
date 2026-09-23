@@ -70,12 +70,15 @@ one thing. Writing a trap into the law is how a rules file reaches 222 entries t
 and therefore nobody follows: measured on this system on 2026-09-02, growing ~4.5 rules a day and
 never once shrinking.
 
-So the lesson has **three possible homes**, and you pick before you write:
+So the lesson has **three possible homes**, and you pick before you write — and **most lessons
+need none of them**: they stay in the commit message, or they become a mechanism (a test, a check,
+a hook), which beats any sentence.
 
-- **A trap** → the project's traps file (here: `osan-core/trappole.md`), verbatim, with a fresh
-  number. It is grepped when the work reaches that area, never read at `/start`. **This is where
-  almost everything goes.**
-- **A case** → `rules-cases.md`, under the same number — only for a new LAW: what happened, what
+- **A trap** → the project's `traps.md` (`shared/traps.md` only if it binds every project), with
+  the next free number that `rules-check` prints. It is grepped when the work reaches that area,
+  never read at `/start`. **Only if** the defect cost us TWICE and cannot become a mechanism; grep
+  the area first, and if it resembles an entry that exists, widen that one.
+- **A case** → `rule-cases.md`, under the same number — only for a new LAW: what happened, what
   it cost, the shape of the defect, at most 25 lines. The check below refuses a law that arrives
   without one. A trap carries its own story inside its text, in a clause, never as a dated trailer.
 - **A law** → `rules.md`, and ONLY if it passes two tests: it binds every session regardless of

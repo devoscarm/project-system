@@ -16,7 +16,7 @@ tell me and read what's on disk. Then read, before asking me anything:
 
 - `CLAUDE.md` (auto-loaded) — the map: which files exist and when each is read. Trust it over this list.
 - The project's `<name>.md` — what it is and why. If you can't find it, ask me.
-- `rules.md` — the law, whole. Its `rules-cases.md` is opened only when a rule is about to bind.
+- `rules.md` — the law, whole. Its `rule-cases.md` is opened only when a rule is about to bind.
 - `state.md` — what is true now. Written there = true; not written = not true.
 - The file the project keeps for ME to act on (`oscar.md` or equivalent), if any.
 
