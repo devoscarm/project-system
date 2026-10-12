@@ -111,6 +111,35 @@ locked where it now stands. The updated thresholds file goes into this session's
 
 If the project keeps a scoreboard of remaining work, update it **only if something actually changed state**, and re-run the command that measures it instead of deducing the number from your own work.
 
+### 2-ter. If this session changed code: have it reviewed by eyes that did not write it
+
+The gates catch what a tool can see with ~0 false positives. Four principles the human chose to
+hold as REVIEW QUESTIONS instead (here: doctrine 11, «how it is held»; the verdicts in
+`osan-core/audit-qualita-2026-10.md` §4) are asked nowhere else — so they are asked here, before
+the worktree merges, every time code changed. Never by you: you wrote the code, and you will read
+your intent instead of the text.
+
+Spawn ONE sub-agent with a fresh context. Give it the diff (`git diff main...HEAD` in your
+worktree, per repo), doctrine 11, and these four questions, to be answered per question with
+`file:line` and the concrete case, or «nothing»:
+
+1. **Built but not asked for** — an abstraction with one implementation, a parameter nobody
+   passes, a setting with one value, code for a case the business does not have. (Contemplated is
+   not built: doctrine 9.)
+2. **A decision away from the core** — a permission, a policy or a state transition decided inside
+   a repository, a controller, a component or an I/O adapter, where a pure function tested alone
+   belongs.
+3. **A state the business forbids, still representable** — a string where a closed union belongs,
+   two flags that cannot both be true, a field required in one state and optional in the type, an
+   `else` or `default` that swallows the unknown case.
+4. **A comment that claims what the code does not enforce** — an inventory («every X», «the
+   ordered list of»), a promise about order or exclusivity, a name of something gone. Replace it
+   with a test that enumerates, or delete it.
+
+Then, for every finding: fix it in this session, or write in the commit message why it stands.
+The answer «nothing» on all four is a valid outcome — say so in the commit message too, so the
+review leaves a trace. A session that changed no code skips this step.
+
 ## 3. Commit — and push only where the project says to
 
 **In a shared working tree, stage only the files this session touched — never `git add -A`**: a parallel session may have half-finished work in the same tree. Run `git status --short` first; if there are modified files you don't recognise as yours, leave them unstaged and tell me about them.
