@@ -30,7 +30,8 @@ often with `grep`.
   the short id is its first segment. Never take one from `sessions/`, a commit, or another
   session's file. If you can't determine it, ask me.
 - **If the project gives each session a working tree, open it first** (its `CLAUDE.md` names the
-  command) and do all your work there. If not, work in the shared clone under its rules.
+  command) and do all your work there — unless the brief waits on a predecessor (§3): then the lock
+  comes first and the tree only once the wait frees you, from a main that has its code. If not, work in the shared clone under its rules.
 - **The lock claims ownership** and must be readable by a chat that arrives later: repos and file
   trees you own, worktree and branch if any, and how others can reach you (the project says how).
   Prefer one file per session where the project has it. **The filename must be NEW**: if
@@ -71,9 +72,9 @@ Then:
   opened before the merge starts without that code. Say once what you wait on; never ask me to
   relaunch you.
 - **Or start on the predecessor's branch — only if I choose it.** When the predecessor's code is
-  done and its gate green, offer it in the proposal: merge its branch into yours and start now; the
-  project's close refuses until those commits are on main (here: `session.sh close`). The price: a
-  re-merge if the predecessor changes during its own close.
+  done and its gate green, offer it in the proposal: open your tree, `git merge --no-ff
+  session/<pred>` into it, and start now; the project's close refuses until those commits are on
+  main (here: `session.sh close`). The price: a re-merge if the predecessor changes during its close.
 - **A brief is a claim, not a task.** Check cheaply what it assumes — routes, files, migrations —
   and if the world moved, propose the pruned version instead of executing last week's plan.
 - **Then propose and stop**: what it does, **which model and why**, how much work. Wait for my go —

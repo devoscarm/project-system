@@ -13,11 +13,13 @@ you skipped.
 
 /end does two kinds of work, and only one of them has to queue.
 
-- **Closing the CODE** — step 2-ter's review, the project's gate on the tip you will merge, step
-  3-bis's close — touches your own working tree and, for seconds, the repo's main. Parallel /ends
-  do it side by side; the project's close command queues the merges by itself (here:
-  `scripts/session.sh close`, a lock per repo). If it refuses because another session merged first
-  (a migration number, its branch inside yours), fix what it names and re-run.
+- **Closing the CODE** — step 2-ter's review, merging main INTO your branch, the project's gate on
+  that tip, step 3-bis's close — touches your own working tree and, for seconds, the repo's main.
+  Parallel /ends do it side by side; the project's close command queues the merges by itself
+  (here: `scripts/session.sh close`, a lock per repo) and refuses while main is not inside your
+  branch, so a conflict is always resolved in YOUR tree, never in the shared main. If it refuses
+  (main moved, a migration number, another session's commits inside yours), fix what it names in
+  your tree — re-running the gate if what main brought touches your work — and re-run.
 - **Writing the SHARED PROSE** — steps 1, 2, 2-bis, 3's commit of the context repo, 4 — is a
   read-merge-write of files every /end rewrites. Where that clone is shared, two at once redo each
   other's merges, and one interrupted midway leaves a half-/end anybody's next commit sweeps in.
@@ -30,8 +32,9 @@ So:
    it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what
    that one left uncommitted before you write anything.
 3. **Steps 1 → 2 → 2-bis → 3 (the context repo) → 4, then drop it** (here: `baton drop <id>`)
-   right after the context push. Never drop it halfway through to hand over a broken state; if you
-   must stop, drop it and tell me where you stopped.
+   right after the context push. If you must stop halfway (a red you cannot fix, a question for
+   me), KEEP it and tell me where you stopped: the next taker is let in after a lease (here: 30
+   min) and is shown your uncommitted files — whoever takes the baton reads those before writing.
 
 Where the project has no baton command, the fallback is git as the mutex: mark your own lock
 `⏳ /end in corso`, commit that alone, push, and look for another `⏳` before step 1. One verb per
@@ -63,8 +66,8 @@ it, or a pointer. A count that changes with every merge is not written — its c
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
 - **And its name leaves every other brief's order line**, in the same commit (here:
   `scripts/session.sh release <brief>`, then commit the files it prints) — also when the brief
-  stays open for my live check: what frees a dependent is your code on main, not my eye. Nobody
-  messages another chat to «release» a line.
+  stays open for my live check: what frees a dependent is your code on main, not my eye. A brief
+  it SKIPS has its owner's edits in flight: message that owner (its lock's address) instead.
 - **A brief this session did NOT execute is re-verified before it is left in the queue** — and this is the move that gets skipped. Other sessions have been building all along, so parts of it may already exist, or its premise may be gone. Where checking is cheap, check; then prune it to what is still true, or delete it as **done by other means**. A brief that quietly rots is worse than a stale note, because someone will hand it to a fresh session and it will be *obeyed*.
 - **If this session wrote briefs for others**, make sure each one carries what its executor needs before it can start: the file perimeter it owns, its sequencing constraints against the other open briefs, and its recommended model — so the executing session can propose and wait rather than guess.
 - ⚠️ **And every brief declares three things, each in a section of its own — the check refuses
