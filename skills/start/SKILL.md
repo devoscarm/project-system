@@ -55,13 +55,29 @@ Then:
 - **No mission named, or «which brief?»** — enumerate them (the root `CLAUDE.md` gives the
   command, e.g. `ls */mandate-*.md`), read each owning project's `state.md` for queue line and live
   locks, and give me ONE table: what each does, its size, and whether it can run NOW beside the
-  live sessions (a brief sharing a repo with a live session cannot — name the collision). Rank by
+  live sessions. Only two things stop it: a file on a SHARED disk that a live session owns (the
+  context clone, a repo without per-session trees — name the collision), and a predecessor in its
+  order line whose code is not merged yet (name it, and who executes it). Sharing code files in
+  per-session trees is NOT a collision: both run, the second to close resolves at merge. Rank by
   parallel-safety first, value second. If a design session is already live, assume this one executes.
 - **A brief is named — read it in full, now.** Its perimeter replaces your guess: re-commit the
   lock to match. Read less than a planner would: open only the on-demand files it names.
+- **Its order line decides whether to wait — not me.** If the brief names predecessors (here:
+  `**Seriale dopo:**`), run the project's wait (here: `scripts/session.sh wait <brief>`). Exit 0:
+  free. Exit 3: nobody executes a predecessor — say so in the proposal, don't wait. Otherwise it is
+  waiting: write what on into your lock (here: an `Aspetta:` line), commit it, and re-run the wait
+  **in the background** — you are woken when it exits. Meanwhile do everything that does not need
+  the predecessor's code (check the claims, write the proposal), but open no working tree: one
+  opened before the merge starts without that code. Say once what you wait on; never ask me to
+  relaunch you.
+- **Or start on the predecessor's branch — only if I choose it.** When the predecessor's code is
+  done and its gate green, offer it in the proposal: merge its branch into yours and start now; the
+  project's close refuses until those commits are on main (here: `session.sh close`). The price: a
+  re-merge if the predecessor changes during its own close.
 - **A brief is a claim, not a task.** Check cheaply what it assumes — routes, files, migrations —
   and if the world moved, propose the pruned version instead of executing last week's plan.
-- **Then propose and stop**: what it does, **which model and why**, how much work. Wait for my go.
+- **Then propose and stop**: what it does, **which model and why**, how much work. Wait for my go —
+  unless my launch line already carries it (`/start <brief> vai`): then write the proposal and go on.
   One line decides the model: *the more a mistake would propagate instead of failing, the stronger
   the model.*
 

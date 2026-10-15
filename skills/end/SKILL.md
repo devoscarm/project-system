@@ -9,24 +9,33 @@ I'm ending a session. Do these five steps in order, starting from 0.
 if a step says to do something I have just told you not to, do what I said and name the step
 you skipped.
 
-## 0. Take the /end baton — where the clone is still shared
+## 0. The order: the code first, then the shared prose — one /end at a time
 
-/end is a read-merge-write of the whole state file. Where that file lives in a clone other
-sessions also commit to, two /end runs at once redo each other's merges until luck converges
-them, and one interrupted midway leaves an uncommitted half-/end that anybody's next commit
-sweeps in. There, /end runs **one at a time**, and git itself is the mutex:
+/end does two kinds of work, and only one of them has to queue.
 
-- First gesture: mark **your own** lock with `⏳ /end in corso`, commit **that alone**, push.
-- If the push is rejected, pull `--rebase` and look: another lock carrying `⏳` means **stop and
-  wait** — tell me another /end is running, and retry when its marker is gone. No other marker:
-  push again.
-- Only with your marker visible on the remote do steps 1-4 begin. It dies with your lock in step 1.
-- One verb per call throughout: pull, THEN look, THEN edit, THEN commit, THEN push — never chained.
+- **Closing the CODE** — step 2-ter's review, the project's gate on the tip you will merge, step
+  3-bis's close — touches your own working tree and, for seconds, the repo's main. Parallel /ends
+  do it side by side; the project's close command queues the merges by itself (here:
+  `scripts/session.sh close`, a lock per repo). If it refuses because another session merged first
+  (a migration number, its branch inside yours), fix what it names and re-run.
+- **Writing the SHARED PROSE** — steps 1, 2, 2-bis, 3's commit of the context repo, 4 — is a
+  read-merge-write of files every /end rewrites. Where that clone is shared, two at once redo each
+  other's merges, and one interrupted midway leaves a half-/end anybody's next commit sweeps in.
 
-⚠️ **This is about the file, not about the ritual.** Where the project gives each session its own
-working tree, the CODE needs none of this — your commits are yours by construction. Where locks
-are one file per session, the flight list needs none of it either: you delete your own file and
-nobody else's. What still needs the baton is the shared prose that every /end rewrites.
+So:
+
+1. **The code first, holding nothing**: 2-ter, the gate, 3-bis.
+2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
+   returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
+   it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what
+   that one left uncommitted before you write anything.
+3. **Steps 1 → 2 → 2-bis → 3 (the context repo) → 4, then drop it** (here: `baton drop <id>`)
+   right after the context push. Never drop it halfway through to hand over a broken state; if you
+   must stop, drop it and tell me where you stopped.
+
+Where the project has no baton command, the fallback is git as the mutex: mark your own lock
+`⏳ /end in corso`, commit that alone, push, and look for another `⏳` before step 1. One verb per
+call throughout: pull, THEN look, THEN edit, THEN commit, THEN push — never chained.
 
 ## 1. Reconcile state.md — which means deleting, not only writing
 
@@ -52,6 +61,10 @@ it, or a pointer. A count that changes with every merge is not written — its c
 **Briefs** (what the project may call *mandates* or *work orders* — a decided contract handed to an executing session): they are a **queue**, not a record, and they obey the same law as the rest of this file.
 
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
+- **And its name leaves every other brief's order line**, in the same commit (here:
+  `scripts/session.sh release <brief>`, then commit the files it prints) — also when the brief
+  stays open for my live check: what frees a dependent is your code on main, not my eye. Nobody
+  messages another chat to «release» a line.
 - **A brief this session did NOT execute is re-verified before it is left in the queue** — and this is the move that gets skipped. Other sessions have been building all along, so parts of it may already exist, or its premise may be gone. Where checking is cheap, check; then prune it to what is still true, or delete it as **done by other means**. A brief that quietly rots is worse than a stale note, because someone will hand it to a fresh session and it will be *obeyed*.
 - **If this session wrote briefs for others**, make sure each one carries what its executor needs before it can start: the file perimeter it owns, its sequencing constraints against the other open briefs, and its recommended model — so the executing session can propose and wait rather than guess.
 - ⚠️ **And every brief declares three things, each in a section of its own — the check refuses
@@ -168,7 +181,7 @@ a threshold up by hand to make the red go away.
 ## 3-bis. Hand your work back — close the worktree
 
 If this session had its own working tree, close it the way the project says (it will have one
-command). Two things that are not optional:
+command) — in step 0's first phase, before the baton. Two things that are not optional:
 
 - **Commit everything first.** Closing a worktree with uncommitted work throws that work away.
 - **The re-entry never rewrites commits.** A merge keeps every SHA, every author, every
