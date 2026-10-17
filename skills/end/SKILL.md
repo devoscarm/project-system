@@ -64,6 +64,12 @@ it, or a pointer. A count that changes with every merge is not written — its c
 **Briefs** (what the project may call *mandates* or *work orders* — a decided contract handed to an executing session): they are a **queue**, not a record, and they obey the same law as the rest of this file.
 
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
+- **But what it leaves open travels first.** Before deleting it, list everything the brief or this
+  session declares still open — ⛔ or ⏳ rows, «left», «not covered», «for Oscar», a review finding
+  left standing — and move each to a live file (state, the notebook, Oscar's list, another brief).
+  The commit says where, one line each: `Avanzi: <item> → <file>`, or `Avanzi: nessuno`; the
+  project's commit-msg hook refuses a deleting commit without them. A leftover said only in the
+  commit dies with the file: about thirty did in four days.
 - **And its name leaves every other brief's order line**, in the same commit (here:
   `scripts/session.sh release <brief>`, then commit the files it prints) — also when the brief
   stays open for my live check: what frees a dependent is your code on main, not my eye. A brief
