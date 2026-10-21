@@ -70,6 +70,14 @@ it, or a pointer. A count that changes with every merge is not written — its c
   The commit says where, one line each: `Avanzi: <item> → <file>`, or `Avanzi: nessuno`; the
   project's commit-msg hook refuses a deleting commit without them. A leftover said only in the
   commit dies with the file: about thirty did in four days.
+- **And so does what this session's COMMITS left open, brief deleted or not.** A code commit's
+  «⚠️ residual», a review finding that «stands», a «not verified», an «accepted»: each is cited by
+  its sha, `Avanzi: <item> (<sha>) → <file>` or `Solo commit: <sha> — <why the commit is enough>`
+  (here: `python3 scripts/residui.py <id>` lists them; the commit-msg hook refuses an `/end <id>`
+  that leaves one uncited). And a commit that changed what a durable file says is TRUE — a
+  decision of mine, a behaviour the knowledge describes, a gesture on my list — updates that file
+  in this /end: no hook sees it, and the next reader of the file obeys the old line. A read-back of
+  18-20/10 found twenty such items said only in commits, six able to bite a customer's switch.
 - **And its name leaves every other brief's order line**, in the same commit (here:
   `scripts/session.sh release <brief>`, then commit the files it prints) — also when the brief
   stays open for my live check: what frees a dependent is your code on main, not my eye. A brief
