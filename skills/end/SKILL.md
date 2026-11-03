@@ -19,18 +19,24 @@ you skipped.
   (here: `scripts/session.sh close`, a lock per repo) and refuses while main is not inside your
   branch, so a conflict is always resolved in YOUR tree, never in the shared main. If it refuses
   (main moved, a migration number, another session's commits inside yours), fix what it names in
-  your tree — re-running the gate if what main brought touches your work — and re-run.
+  your tree and run the gate again (here: `scripts/session.sh gate <id>`, which syncs first).
 - **Writing the SHARED PROSE** — steps 1, 2, 2-bis, 3's commit of the context repo, 4 — is a
   read-merge-write of files every /end rewrites. Where that clone is shared, two at once redo each
   other's merges, and one interrupted midway leaves a half-/end anybody's next commit sweeps in.
 
 So:
 
-1. **The code first, holding nothing**: 2-ter, the gate, 3-bis. **The gate runs ONCE, on the
-   tree you will close**: before it, merge main if it moved (here: `scripts/session.sh sync <id>`),
-   finish every file (a README edited after a green gate voids the stamp and can turn a partial e2e
-   into the whole suite), and run the WHOLE unit suite — each re-run costs 15-35 minutes of the
-   human's wait (here: shared trap 215).
+1. **The code first, holding nothing — in this order, and the gate ONCE**:
+   - **2-ter's review FIRST, and its fixes committed** — never launched beside the gate: every fix
+     it brings is a new tip, and a new tip is a whole new gate.
+   - **Every file finished** — READMEs, comments, the context pointers in the code repo: a file
+     edited after a green gate voids its stamp (and a README can turn a partial e2e into the whole
+     suite).
+   - **Then the gate, as ONE command** where the project has it (here: `scripts/session.sh gate
+     <id>` — it merges main if it moved, refuses a dirty tree, runs every repo's rehearsal beside
+     the e2e and stops the e2e on a rehearsal red). Never the pieces by hand, never read through a
+     pipe: each re-run costs the human 15-35 minutes of waiting (here: shared trap 215).
+   - **Then 3-bis's close.** If it refuses because main moved again meanwhile, `gate` again.
 2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
    returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
    it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what
@@ -152,6 +158,9 @@ hold as REVIEW QUESTIONS instead (here: doctrine 11, «how it is held»; the ver
 `osan-core/audit-qualita-2026-10.md` §4) are asked nowhere else — so they are asked here, before
 the worktree merges, every time code changed. Never by you: you wrote the code, and you will read
 your intent instead of the text.
+
+**When**: before the gate, never beside it (step 0). Better still, run it after each slice the
+session commits, while it works — a finding fixed mid-session costs a commit; at /end it costs a gate.
 
 Spawn ONE sub-agent with a fresh context. Give it the diff (`git diff main...HEAD` in your
 worktree, per repo), doctrine 11, and these four questions, to be answered per question with
