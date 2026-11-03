@@ -26,7 +26,11 @@ you skipped.
 
 So:
 
-1. **The code first, holding nothing**: 2-ter, the gate, 3-bis.
+1. **The code first, holding nothing**: 2-ter, the gate, 3-bis. **The gate runs ONCE, on the
+   tree you will close**: before it, merge main if it moved (here: `scripts/session.sh sync <id>`),
+   finish every file (a README edited after a green gate voids the stamp and can turn a partial e2e
+   into the whole suite), and run the WHOLE unit suite — each re-run costs 15-35 minutes of the
+   human's wait (here: shared trap 215).
 2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
    returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
    it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what
