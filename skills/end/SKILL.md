@@ -166,6 +166,16 @@ worktree, per repo), doctrine 11, and these four questions, to be answered per q
    ordered list of»), a promise about order or exclusivity, a name of something gone. Replace it
    with a test that enumerates, or delete it.
 
+**If the session touched screens** and the project keeps graphic rules (here: osan-web's
+`src/ui/README.md` §3c, the G-rules), the same sub-agent gets them whole, plus a screenshot of
+every screen the diff touches — desk width, and phone width where the screen has one — taken by you
+from the worktree's dev servers (here: `skills/dev-up`). A fifth question:
+
+5. **A graphic rule broken** — for each rule the touched screens fall under: violated, with
+   `file:line` or the screenshot and what is seen there, or «nothing». Most of these rules are
+   judged by eye, and until now the only eye was the human's, after the merge (Oscar, 03/11: «le
+   violi sistematicamente»).
+
 Then, for every finding: fix it in this session, or write in the commit message why it stands.
 The answer «nothing» on all four is a valid outcome — say so in the commit message too, so the
 review leaves a trace. A session that changed no code skips this step.
