@@ -240,6 +240,24 @@ command) — in step 0's first phase, before the baton. Two things that are not 
 
 If this session worked in a shared clone instead, there is nothing to close here.
 
+### 3-ter. Read the closing account — every incident teaches once
+
+The close prints it (here: `closing account: N gate run(s), R red, … min`; the record of every close
+is `scripts/session.sh ledger`). One run and no red is a clean close: one line in step 4, done.
+Otherwise, for EACH red and each extra run, answer three questions before the prose steps:
+
+1. **What caught it, and when** — which check, how many minutes into which run.
+2. **The earliest moment a check could have caught it** — the commit, the slice, the first minute
+   of the gate — and what it would have cost there.
+3. **Was there a mechanism?** If one existed and you skipped it, say which, plainly. If none
+   existed, propose the smallest one that would have caught it at that earliest moment (an order,
+   a fence, a hook) — in step 4, to me, with the minutes it cost. Step 2 still decides where a
+   lesson lives: a mechanism, rarely a sentence.
+
+(Oscar 04/11, after a close that ran three gates: «un controllo alla fine delle chiusure che valuta
+gli incidenti di percorso, così da migliorare via via».)
+
 ## 4. Tell me what you deleted
 
-Close by naming what came *out* of `state.md`, and why: closed, superseded, or disproved. It is the half of this ritual I cannot see from a diff without reading the whole thing, and it is the half that keeps the file honest.
+Start with the closing account (3-ter): clean, or each incident with its minutes and its proposed
+mechanism. Then close by naming what came *out* of `state.md`, and why: closed, superseded, or disproved. It is the half of this ritual I cannot see from a diff without reading the whole thing, and it is the half that keeps the file honest.
