@@ -82,6 +82,22 @@ Then:
   One line decides the model: *the more a mistake would propagate instead of failing, the stronger
   the model.*
 
+## 3-bis. While executing: every slice closes itself
+
+A finding at /end costs a whole gate; the same finding after a slice costs a commit. So when a
+brief has slices (or the work has natural pieces), each one ends with, in this order:
+
+1. **The fresh-eyes review** of that slice's diff — /end's step 2-ter agent, same four questions —
+   and its fixes committed. Never by you: you read your intent instead of the text.
+2. **The project's whole unit check** (here: the repo's `scripts/ci/rehearse.sh` in the worktree),
+   never a folder at a time: the suite-wide fences (catalogues, cycles) live outside your folder.
+3. **The slice's e2e, in the background** (here: `scripts/session.sh e2e <id>`): its stamp is
+   reused, so the final gate counts only the changes after it (plus main's, if main moved: those
+   meet your code for the first time). It yields
+   to a session holding the close turn, so it never delays somebody's merge.
+
+Read every verdict by its exit code, never through a pipe (the project's hook refuses it).
+
 ## 4. Grill me
 
 Interview me until we both can state what we're building and why: one question at a time, each

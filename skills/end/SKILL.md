@@ -36,12 +36,20 @@ So:
      <id>` — it merges main if it moved, refuses a dirty tree, runs every repo's rehearsal beside
      the e2e and stops the e2e on a rehearsal red). Never the pieces by hand, never read through a
      pipe: each re-run costs the human 15-35 minutes of waiting (here: shared trap 215).
-   - **Then 3-bis's close.** If it refuses because main moved again meanwhile, `gate` again.
+     **Launch it in the background**: it first takes the CLOSE TURN (here: `session.sh turn` shows
+     who holds it), so while another session gates or closes it waits — saying once whom for — and
+     starts no run that a merge would void. Waiting is the price; a voided gate costs more.
+   - **Then 3-bis's close, right away**: a green gate keeps the turn for you only for a lease (here:
+     30 min); past it the next session takes it over and you gate again. If close refuses on
+     anything else, fix it and re-run close inside the lease.
 2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
    returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
    it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what
    that one left uncommitted before you write anything.
-3. **Steps 1 → 2 → 2-bis → 3 (the context repo) → 4, then drop it** (here: `baton drop <id>`)
+3. **Steps 1 → 2 → 2-bis → 3 (the context repo) → 4, then drop it**. Run 2-bis's check in full
+   (here: `python3 scripts/rules-check.py`, NOT `--hook`) ONCE after writing the prose and BEFORE
+   the first commit: it lists every ceiling and rule at once — the pre-commit runs `--hook`, which
+   skips the meter, so committing first discovers them one red at a time (04/11: ~15 min). Then (here: `baton drop <id>`)
    right after the context push. If you must stop halfway (a red you cannot fix, a question for
    me), KEEP it and tell me where you stopped: the next taker is let in after a lease (here: 30
    min) and is shown your uncommitted files — whoever takes the baton reads those before writing.
