@@ -39,8 +39,18 @@ So:
      **Launch it in the background**: it first takes the CLOSE TURN (here: `session.sh turn` shows
      who holds it), so while another session gates or closes it waits — saying once whom for — and
      starts no run that a merge would void. Waiting is the price; a voided gate costs more.
+     It runs the quick checks first (here: the migrations' dump/restore, the lexicon census — a
+     red there costs a minute, not a gate). Where the project has a close TRAIN (here: since
+     07/11), the gate boards at once and rides
+     with every session gating at the same time: ONE candidate of all your branches, ONE run.
+     Its lines: «on train N, conductor X» — you wait for that run's verdict; «LEFT train N: …» —
+     the red is yours (a conflict, your rehearse, a suite red again on your own tip alone), the
+     others go on without you; «split» — a red nobody reproduces alone, you ride the next train;
+     «Gate green on train N … you close kº» — close now, it waits for the members before you.
    - **Then 3-bis's close, right away**: a green gate keeps the turn for you only for a lease (here:
-     30 min); past it the next session takes it over and you gate again. If close refuses on
+     30 min); past it the next session takes it over and you gate again. On a train the lease is
+     each member's, from the close before it — and a member that lets it lapse, or commits after
+     the run, sends everyone after it back to the gate. If close refuses on
      anything else, fix it and re-run close inside the lease.
 2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
    returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
