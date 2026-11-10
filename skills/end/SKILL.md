@@ -39,6 +39,12 @@ So:
      **Launch it in the background**: it first takes the CLOSE TURN (here: `session.sh turn` shows
      who holds it), so while another session gates or closes it waits — saying once whom for — and
      starts no run that a merge would void. Waiting is the price; a voided gate costs more.
+     **Detached from the session, and watched**: the harness may kill an idle session's background
+     shells under memory pressure, and a gate is the heaviest thing a box runs (here: 10/11, three
+     gates killed mid-e2e while another session's eslint took 3 GB). So start it with
+     `setsid nohup bash -c '<gate> > <log> 2>&1; echo "GATE EXIT $?" >> <log>' &` and follow the
+     log with a monitor on its verdict lines (green, RED, REFUSED, `GATE EXIT`) — never a plain
+     background shell.
      It runs the quick checks first (here: the migrations' dump/restore, the lexicon census — a
      red there costs a minute, not a gate). Where the project has a close TRAIN (here: since
      07/11), the gate boards at once and rides
