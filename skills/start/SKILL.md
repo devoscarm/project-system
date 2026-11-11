@@ -94,7 +94,7 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
 3. **The slice's e2e, in the background** (here: `scripts/session.sh e2e <id>`): its stamp is
    reused, so the final gate counts only the changes after it (plus main's, if main moved: those
    meet your code for the first time). It yields
-   to a session holding the close turn, so it never delays somebody's merge.
+   to a train departing or closing, so it never delays somebody's merge.
    A slice that adds a migration runs it in that same slice, never «at the gate»: a migration runs
    every suite, and the schema's own fences (masking, RLS, grants) go first and answer in minutes.
 
