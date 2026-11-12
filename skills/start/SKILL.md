@@ -87,7 +87,11 @@ Then:
 A finding at /end costs a whole gate; the same finding after a slice costs a commit. So when a
 brief has slices (or the work has natural pieces), each one ends with, in this order:
 
-1. **The fresh-eyes review** of that slice's diff — /end's step 2-ter agent, same four questions —
+0. **On today's main** (here: `scripts/session.sh sync <id>`): every session in parallel lands
+   small and often, so main moves under you; a conflict met now is yours to solve in your tree,
+   met at the gate it throws you off a train and costs everybody a run (12/11, train 66: two
+   sessions grew the same file, the second was refused). After the sync, a ceiling or a baseline
+   both sides raised is RE-MEASURED on the merged tree, never the higher of the two. of that slice's diff — /end's step 2-ter agent, same four questions —
    on the commits `scripts/review-stamp.sh base <id>` (claude-ctx) names; its fixes committed, then
    `review-stamp.sh mark <id>`: /land and /end then skip the review instead of redoing it. Never by
    you: you read your intent instead of the text. **«Ready» / «pronta» to Oscar** only when
@@ -101,6 +105,12 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
    to a train departing or closing, so it never delays somebody's merge.
    A slice that adds a migration runs it in that same slice, never «at the gate»: a migration runs
    every suite, and the schema's own fences (masking, RLS, grants) go first and answer in minutes.
+4. **Green → land it now** (skill `land`: the gate, then `close --stay`), never «all at /end»
+   (Oscar 12/11: «voglio parallelizzare le cose, che non si mettano i bastoni tra le ruote»). A
+   slice on main is a slice every other session builds on and checks against; ten slices held
+   until /end are ten slices nobody saw, met at once by two trains. /end then has only the prose
+   and the last slice. A slice that cannot land alone (half a contract, a migration whose readers
+   come later) says so in the lock and rides with the next one.
 
 Read every verdict by its exit code, never through a pipe (the project's hook refuses it).
 
