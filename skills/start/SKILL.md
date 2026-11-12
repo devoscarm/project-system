@@ -88,7 +88,11 @@ A finding at /end costs a whole gate; the same finding after a slice costs a com
 brief has slices (or the work has natural pieces), each one ends with, in this order:
 
 1. **The fresh-eyes review** of that slice's diff — /end's step 2-ter agent, same four questions —
-   and its fixes committed. Never by you: you read your intent instead of the text.
+   on the commits `scripts/review-stamp.sh base <id>` (claude-ctx) names; its fixes committed, then
+   `review-stamp.sh mark <id>`: /land and /end then skip the review instead of redoing it. Never by
+   you: you read your intent instead of the text. **«Ready» / «pronta» to Oscar** only when
+   `review-stamp.sh check <id>` exits 0 AND the rehearsals of the tip are green: said before, it
+   is not true (12/11: two sessions said «pronta» and their /end found the review still to do).
 2. **The project's whole unit check** (here: the repo's `scripts/ci/rehearse.sh` in the worktree),
    never a folder at a time: the suite-wide fences (catalogues, cycles) live outside your folder.
 3. **The slice's e2e, in the background** (here: `scripts/session.sh e2e <id>`): its stamp is

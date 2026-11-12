@@ -183,11 +183,15 @@ hold as REVIEW QUESTIONS instead (here: doctrine 11, «how it is held»; the ver
 the worktree merges, every time code changed. Never by you: you wrote the code, and you will read
 your intent instead of the text.
 
-**When**: before the gate, never beside it (step 0). Better still, run it after each slice the
-session commits, while it works — a finding fixed mid-session costs a commit; at /end it costs a gate.
+**When**: before the gate, never beside it (step 0) — and normally ALREADY DONE: /start §3-bis
+reviews each slice and stamps it. So first `scripts/review-stamp.sh check <id>` (claude-ctx): exit 0
+= nothing the session wrote came after the last review → this step is done, skip it. Exit 1 names
+the commits not yet read: review those (`review-stamp.sh base <id>` gives where to start), commit
+the fixes, then `review-stamp.sh mark <id>` (Oscar 12/11: «quella roba deve essere scoperta prima!»:
+a review met only at /end cost the dictated note another rehearsal before its gate).
 
-Spawn ONE sub-agent with a fresh context. Give it the diff (`git diff main...HEAD` in your
-worktree, per repo), doctrine 11, and these four questions, to be answered per question with
+Spawn ONE sub-agent with a fresh context. Give it the diff (the session's own commits since the
+base: `git log -p --no-merges <base>..HEAD ^main` in your worktree, per repo), doctrine 11, and these four questions, to be answered per question with
 `file:line` and the concrete case, or «nothing»:
 
 1. **Built but not asked for** — an abstraction with one implementation, a parameter nobody
