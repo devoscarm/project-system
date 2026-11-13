@@ -26,38 +26,16 @@ you skipped.
 
 So:
 
-1. **The code first, holding nothing — in this order, and the gate ONCE**:
-   - **2-ter's review FIRST, and its fixes committed** — never launched beside the gate: every fix
-     it brings is a new tip, and a new tip is a whole new gate.
-   - **Every file finished** — READMEs, comments, the context pointers in the code repo: a file
-     edited after a green gate voids its stamp (and a README can turn a partial e2e into the whole
-     suite).
-   - **Then the gate, as ONE command** where the project has it (here: `scripts/session.sh gate
-     <id>` — it merges main if it moved, refuses a dirty tree, runs every repo's rehearsal beside
-     the e2e and stops the e2e on a rehearsal red). Never the pieces by hand, never read through a
-     pipe: each re-run costs the human 15-35 minutes of waiting (here: shared trap 215).
-     **Launch it in the background**: it first takes the CLOSE TURN (here: `session.sh turn` shows
-     who holds it), so while another session gates or closes it waits — saying once whom for — and
-     starts no run that a merge would void. Waiting is the price; a voided gate costs more.
-     **Detached from the session, and watched**: the harness may kill an idle session's background
-     shells under memory pressure, and a gate is the heaviest thing a box runs (here: 10/11, three
-     gates killed mid-e2e while another session's eslint took 3 GB). So start it with
-     `setsid nohup bash -c '<gate> > <log> 2>&1; echo "GATE EXIT $?" >> <log>' &` and follow the
-     log with a monitor on its verdict lines (green, RED, REFUSED, `GATE EXIT`) — never a plain
-     background shell.
-     It runs the quick checks first (here: the migrations' dump/restore, the lexicon census — a
-     red there costs a minute, not a gate). Where the project has a close TRAIN (here: since
-     07/11), the gate boards at once and rides
-     with every session gating at the same time: ONE candidate of all your branches, ONE run.
-     Its lines: «on train N, conductor X» — you wait for that run's verdict; «LEFT train N: …» —
-     the red is yours (a conflict, your rehearse, a suite red again on your own tip alone), the
-     others go on without you; «split» — a red nobody reproduces alone, you ride the next train;
-     «Gate green on train N … you close kº» — close now, it waits for the members before you.
-   - **Then 3-bis's close, right away**: a green gate keeps the turn for you only for a lease (here:
-     30 min); past it the next session takes it over and you gate again. On a train the lease is
-     each member's, from the close before it — and a member that lets it lapse, or commits after
-     the run, sends everyone after it back to the gate. If close refuses on
-     anything else, fix it and re-run close inside the lease.
+1. **The code first: landed, ALWAYS, before any prose** (Oscar 13/11: «sempre da fare il land
+   prima dell'end, così l'end di fatto tratta solo prosa»). Normally done already: the session
+   said «pronta» only once nothing of it was outside main (/start §3-bis). If something is, this
+   is the net. Where the project has a landing skill
+   (here: `/land`, claude-ctx `skills/land/SKILL.md`), run it whole — the review unless its stamp
+   says done, the gate ONCE (detached and watched: its step 3), the close with `--stay`, and its
+   step 6, the leftovers finished now. Every line of code reaches main there; /end itself never
+   gates. Nothing of the session outside main (here: `git -C <worktree> rev-list main..HEAD` empty
+   in every repo) → nothing to land, go on. A red you cannot fix stops /end here: tell me.
+   At 3-bis the worktree is then equal to main, and closing it merges nothing.
 2. **Then take the baton, in the background** (here: `scripts/session.sh baton take <id>`): it
    returns when it is your turn, saying once «in coda dietro <id>» if it is not. You are woken when
    it exits; never ask me to retype the /end. If it reports a TAKEOVER from a dead /end, read what

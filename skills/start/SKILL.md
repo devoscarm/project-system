@@ -96,9 +96,11 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
    on the commits `scripts/review-stamp.sh base <id>` (claude-ctx) names; its fixes committed, step
    2's rehearse green on that commit, then `review-stamp.sh mark <id>` (it refuses without the
    green rehearse): /land and /end then skip the review instead of redoing it. Never by
-   you: you read your intent instead of the text. **«Ready» / «pronta» to Oscar** only when
-   `review-stamp.sh check <id>` exits 0 AND the rehearsals of the tip are green: said before, it
-   is not true (12/11: two sessions said «pronta» and their /end found the review still to do).
+   you: you read your intent instead of the text. **«Ready» / «pronta» (for /end) to Oscar** only
+   when the work is LANDED: nothing of the session outside main in any repo — at least one `/land`
+   (review stamped, gate green, synced with the other sessions by the train, its leftovers done),
+   one per slice where there are several. /end then handles prose only (Oscar 13/11). A Stop hook
+   refuses «pronta» said with commits still outside main (here: `scripts/hooks/claude/ready_check.py`).
 2. **The project's whole unit check** (here: the repo's `scripts/ci/rehearse.sh` in the worktree),
    never a folder at a time: the suite-wide fences (catalogues, cycles) live outside your folder.
 3. **The slice's e2e, in the background** (here: `scripts/session.sh e2e <id>`): its stamp is
