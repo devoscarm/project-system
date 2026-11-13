@@ -187,7 +187,8 @@ your intent instead of the text.
 reviews each slice and stamps it. So first `scripts/review-stamp.sh check <id>` (claude-ctx): exit 0
 = nothing the session wrote came after the last review → this step is done, skip it. Exit 1 names
 the commits not yet read: review those (`review-stamp.sh base <id>` gives where to start), commit
-the fixes, then `review-stamp.sh mark <id>` (Oscar 12/11: «quella roba deve essere scoperta prima!»:
+the fixes, run `scripts/ci/rehearse.sh` green in each worktree, then `review-stamp.sh mark <id>`
+(it refuses without the green rehearse) (Oscar 12/11: «quella roba deve essere scoperta prima!»:
 a review met only at /end cost the dictated note another rehearsal before its gate).
 
 Spawn ONE sub-agent with a fresh context. Give it the diff (the session's own commits since the

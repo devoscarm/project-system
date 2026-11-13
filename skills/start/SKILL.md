@@ -91,9 +91,11 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
    small and often, so main moves under you; a conflict met now is yours to solve in your tree,
    met at the gate it throws you off a train and costs everybody a run (12/11, train 66: two
    sessions grew the same file, the second was refused). After the sync, a ceiling or a baseline
-   both sides raised is RE-MEASURED on the merged tree, never the higher of the two. of that slice's diff — /end's step 2-ter agent, same four questions —
-   on the commits `scripts/review-stamp.sh base <id>` (claude-ctx) names; its fixes committed, then
-   `review-stamp.sh mark <id>`: /land and /end then skip the review instead of redoing it. Never by
+   both sides raised is RE-MEASURED on the merged tree, never the higher of the two.
+1. **A fresh-eyes review** of that slice's diff — /end's step 2-ter agent, same four questions —
+   on the commits `scripts/review-stamp.sh base <id>` (claude-ctx) names; its fixes committed, step
+   2's rehearse green on that commit, then `review-stamp.sh mark <id>` (it refuses without the
+   green rehearse): /land and /end then skip the review instead of redoing it. Never by
    you: you read your intent instead of the text. **«Ready» / «pronta» to Oscar** only when
    `review-stamp.sh check <id>` exits 0 AND the rehearsals of the tip are green: said before, it
    is not true (12/11: two sessions said «pronta» and their /end found the review still to do).
