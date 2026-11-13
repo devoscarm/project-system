@@ -242,7 +242,7 @@ Every commit carries a `Claude-Session: <session-id>` trailer (read the id from 
 lines to the always-read set, either prune as much in the same set (one more commit — never
 `--amend`), or, if the growth is deliberate, add an empty commit whose message carries the line
 `Deroga somma zero: <why>`, run the ratchet again, and commit the thresholds it raised. A red file
-threshold the same way: prune first; if the growth is needed, `context-budget.py --alza "<why>"`
+threshold the same way: prune first; if the growth is needed, `context-budget.py --alza "<why>" --solo <your file>`
 and its printed line in the commit. **Never ask me**: I can only say yes, so the session says it
 to itself (Oscar 13/11). Never edit a threshold up by hand.
 
