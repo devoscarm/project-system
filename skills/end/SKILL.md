@@ -98,10 +98,6 @@ it, or a pointer. A count that changes with every merge is not written — its c
 **Briefs** (what the project may call *mandates* or *work orders* — a decided contract handed to an executing session): they are a **queue**, not a record, and they obey the same law as the rest of this file.
 
 - **A brief this session executed is deleted**, file and queue line together, in this commit. It is not ticked and not archived: what it produced is in the code, and why it existed is in the commit message. A brief left behind after its work is done will be executed twice.
-- **What can be finished now is FINISHED now, never parked** (Oscar 13/11: «bisogna cercare di
-  terminarli, i lavori!»): a leftover goes to a live file only if it cannot be done in this
-  session — it waits on a date, on Oscar, on another session's code, or is a brief of its own
-  size. A ten-minute item (a row to write, a cache to delete, a check to run) is done before /end.
 - **But what it leaves open travels first.** Before deleting it, list everything the brief or this
   session declares still open — ⛔ or ⏳ rows, «left», «not covered», «for Oscar», a review finding
   left standing — and move each to a live file (state, the notebook, Oscar's list, another brief).
