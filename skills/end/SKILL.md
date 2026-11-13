@@ -241,8 +241,10 @@ Every commit carries a `Claude-Session: <session-id>` trailer (read the id from 
 `python3 scripts/context-budget.py --somma-zero origin/main`. If this session's commits add net
 lines to the always-read set, either prune as much in the same set (one more commit — never
 `--amend`), or, if the growth is deliberate, add an empty commit whose message carries the line
-`Deroga somma zero: <why>`, run the ratchet again, and commit the thresholds it raised. Never edit
-a threshold up by hand to make the red go away.
+`Deroga somma zero: <why>`, run the ratchet again, and commit the thresholds it raised. A red file
+threshold the same way: prune first; if the growth is needed, `context-budget.py --alza "<why>"`
+and its printed line in the commit. **Never ask me**: I can only say yes, so the session says it
+to itself (Oscar 13/11). Never edit a threshold up by hand.
 
 **Push according to the project's rule, not by reflex.** Where the project says code repos are pushed by hand, commit and stop. If you do push and it is rejected because a parallel session pushed first, `git pull --rebase` and push again; if that surfaces conflicts, stop and show me instead of resolving blindly. If there's no repo or no remote, skip this and tell me the project has no git home yet.
 
