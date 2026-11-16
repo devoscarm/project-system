@@ -103,6 +103,8 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
    refuses «pronta» said with commits still outside main (here: `scripts/hooks/claude/ready_check.py`).
 2. **The project's whole unit check** (here: the repo's `scripts/ci/rehearse.sh` in the worktree),
    never a folder at a time: the suite-wide fences (catalogues, cycles) live outside your folder.
+   While fixing one red step, re-run THAT step alone first (here: `rehearse.sh --only "<label>"`,
+   seconds; a red prints the line), then the whole run once: only the whole run stamps.
 3. **The slice's e2e, in the background** (here: `scripts/session.sh e2e <id>`): its stamp is
    reused, so the final gate counts only the changes after it (plus main's, if main moved: those
    meet your code for the first time). It yields
