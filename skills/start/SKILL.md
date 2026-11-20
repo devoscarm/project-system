@@ -109,8 +109,9 @@ brief has slices (or the work has natural pieces), each one ends with, in this o
    reused, so the final gate counts only the changes after it (plus main's, if main moved: those
    meet your code for the first time). It yields
    to a train departing or closing, so it never delays somebody's merge.
-   A slice that adds a migration runs it in that same slice, never «at the gate»: a migration runs
-   every suite, and the schema's own fences (masking, RLS, grants) go first and answer in minutes.
+   A slice that adds a migration runs it in that same slice, never «at the gate»: the schema's own
+   fences (masking, RLS, grants) go first and answer in minutes, then the suites of what it touches —
+   all of them when it renames, drops or runs dynamic SQL (`e2e.sh --related main --list` shows which).
 4. **Green → land it now** (skill `land`: the gate, then `close --stay`), never «all at /end»
    (Oscar 12/11: «voglio parallelizzare le cose, che non si mettano i bastoni tra le ruote»). A
    slice on main is a slice every other session builds on and checks against; ten slices held
