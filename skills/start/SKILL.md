@@ -1,7 +1,6 @@
 ---
 name: start
 description: Start a session on a project that already exists.
-disable-model-invocation: true
 ---
 
 I'm starting a project, or a new session on one. Do these steps in order.
@@ -42,7 +41,9 @@ often with `grep`.
   measurable while alive; say so in yours if that is what you are.
 - **A role with no lock does not exist** (Oscar 24/11). Where the project has administrative roles (a regia
   that orders the box, a consigliera that answers), each is real only while a lock in `sessions/` declares it.
-  No such lock: every step that says to ask it, tell it or wait for it is skipped, silently. Start on the
+  No such lock: every step that says to ask it, tell it or wait for it is skipped, silently — but never
+  what such a step RECORDS: a measure, a waste, an optimisable point is written by the chat itself, always
+  (e.g. `scripts/waste-note.sh`, the lock's Note), so it survives the role's absence (Oscar 26/11). Start on the
   project's own GO (e.g. `may-launch.sh`), decide a technical choice on the brief and the decisions register,
   and bring me only a real fork. Never message an address taken from memory, an old lock or a hook's echo.
 - **Commit the lock before touching any file of the work.** Reading and measuring touch nothing:
